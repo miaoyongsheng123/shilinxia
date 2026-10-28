@@ -379,3 +379,109 @@ code {
   body.print-qr .key-only { display: none !important; }
   body.print-key .qr-only { display: none !important; }
 }
+
+.page-alert { margin: 0 0 12px; }
+
+.doors { display: grid; gap: 12px; margin-top: 14px; }
+
+.door {
+  display: grid;
+  gap: 4px;
+  padding: 18px 16px;
+  border-radius: 18px;
+  text-decoration: none;
+  color: inherit;
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.door strong { font-family: var(--serif); font-size: 24px; color: var(--pine-deep); }
+
+.lock-card { opacity: 0.72; }
+
+.choice {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  align-items: start;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.choice input[type="radio"],
+.choice input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  accent-color: var(--pine);
+}
+
+.score-list {
+  list-style: none;
+  margin: 14px 0;
+  padding: 8px 16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+
+.score-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.score-list li:last-child { border-bottom: 0; font-size: 18px; }
+
+.table-wrap { overflow-x: auto; margin: 12px 0 18px; }
+
+.board {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.board th, .board td {
+  border-bottom: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.team-card { margin-top: 12px; }
+
+.team-card summary {
+  cursor: pointer;
+  font-family: var(--serif);
+  font-size: 20px;
+}
+
+input.score-input { width: 96px; }
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.tag.ok { background: #dcecde; color: var(--ok); }
+
+.tag.bad { background: #f8e4e0; color: var(--bad); }
+
+.log { margin: 0; padding-left: 18px; }
+
+.log li { margin: 6px 0; }

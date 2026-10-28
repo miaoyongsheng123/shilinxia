@@ -1,118 +1,25 @@
-// 文案都在这个文件顶部。改任务、线索或终局密码，只改这里。
-const PASSWORD = "同心致远";
-const STAFF_FLAG = "haibu-staff";
-const SECRET_KEY = "haibu-shilinxia-secret-v1";
-const FINAL_KEY = "haibu-shilinxia-final-v1";
-const BASE_KEY = "haibu-base-url";
-
-const TASKS = [
-  "不经提醒，主动帮一位队友做一件小事。",
-  "让全队在安全的地方完成一张创意合影，画面里要出现石头。",
-  "在不暴露任务的前提下，让一位其他队员说出「合作」。",
-  "组织全队喊一句鼓励口号。你不能先宣布这是任务。",
-  "问一位非本队队员：今天最期待哪一段路，并听对方说完。",
-  "找到一处安全提示，提醒本队队友看一眼。",
-  "把自己的水让队友先喝一口，不要解释原因。",
-  "给队伍里最安静的人一句具体的称赞。",
-  "记下三位队友今天的一个小目标，结束前向裁判口述。",
-  "在宽敞安全的地方，带全队一起拍手三次。",
-  "用一句话向其他队伍的人介绍「海步」，不要说这是任务。",
-  "观察路旁一种植物，给它起一个像药名的外号，只在队内分享。",
-  "让两支不同队伍的人一起入镜合影。",
-  "休息时把瓶盖或垃圾顺手收好，不要宣扬。",
-  "向一位工作人员说一声谢谢，并说清你在谢什么。",
-  "找出本队今天帮大家最多的人，公开感谢一个具体行为。",
-  "不说话，用动作向另一队传递「加油」。",
-  "请每位队友用一个词形容石林峡，你把这些词连成一句话。",
-  "今天至少叫出三位非本队队员的名字。",
-  "在不暴露任务的前提下，让队伍讨论一次：如果走散了先做什么。",
-  "把队伍分成两人一组，互相检查鞋带和背包带。",
-  "记住路上一种只属于今天的声音，休息时讲给队友听。",
-  "邀请一位其他队伍的人，加入你们一次欢呼。",
-  "发现队友状态不对时，问一句「要不要歇一下」，然后照做。",
-  "给本队起一个今天的小队名，并让大家愿意跟着叫。",
-  "在安全处带全队面向同一方向，一起慢慢呼吸三次。",
-  "向裁判描述你看到的两种不同岩石，可以不用照片。",
-  "帮另一队回答一个正在争论的小问题，答完就离开。",
-  "让本队最活泼的人，安静听一位队友把一段话说完。",
-  "在队内做一轮「今日感谢」：每人只说一个名字。",
-  "把防晒、纸巾或绷带分享给还没准备的人。",
-  "和队友约定一个只有你们懂的手势，之后真的用上一次。",
-  "指出一处不该停留的地方，提醒队伍绕开。",
-  "请一位队员用一两句话讲一个健康小知识。",
-  "终点前带全队回顾：今天一起完成的一件小事。",
-  "对走得太快的队友说「慢一点」，语气是关心。",
-  "让全队在休息时把手机扣下两分钟，只聊天。",
-  "发现别人队伍落下了物品，帮他们交回去。",
-  "用队里现有的人，摆一个「八」或「心」的造型并合影。",
-  "向另一队交换一个路上看到的细节，不涉及解谜线索。"
-];
-
-const TEAMS = {
-  A: [
-    { kind: "hint", text: "第 3 个字在 E 队手里。E 队有一条是假的。" },
-    { kind: "true", text: "第 1 个字是「同」。" },
-    { kind: "false", text: "第 1 个字是「山」。" }
-  ],
-  B: [
-    { kind: "false", text: "整条密码一共六个字。" },
-    { kind: "hint", text: "第 1 个字要和 A 队核对，两队对上的才算数。" },
-    { kind: "true", text: "密码一共四个字，第 1 个字不是「合」。" }
-  ],
-  C: [
-    { kind: "true", text: "第 2 个字是「心」。" },
-    { kind: "false", text: "第 2 个字是「林」。" },
-    { kind: "hint", text: "D 队能证明第 2 个字哪一条是真的。" }
-  ],
-  D: [
-    { kind: "false", text: "第 2 个字是左右结构。" },
-    { kind: "true", text: "第 2 个字只有 4 画。" },
-    { kind: "hint", text: "去找 C 队。用笔画把他们的两种说法对一遍，留下对得上的那个字。" }
-  ],
-  E: [
-    { kind: "hint", text: "问 F 队：第 3 个字有没有三点水。" },
-    { kind: "false", text: "第 3 个字是「海」。" },
-    { kind: "true", text: "第 3 个字是「致」。" }
-  ],
-  F: [
-    { kind: "true", text: "第 3 个字没有三点水。" },
-    { kind: "hint", text: "和第 3 个字有关的另一队是 E，他们有一条是错的。" },
-    { kind: "false", text: "整句密码就是「海步医药」。" }
-  ],
-  G: [
-    { kind: "false", text: "第 4 个字是「步」。" },
-    { kind: "hint", text: "H 队知道最后一个字的部首和笔画。" },
-    { kind: "true", text: "第 4 个字是「远」。" }
-  ],
-  H: [
-    { kind: "hint", text: "去找 G 队核对最后一个字，别信听起来像公司名字的那个。" },
-    { kind: "true", text: "第 4 个字是走之底，一共 7 画。" },
-    { kind: "false", text: "第 4 个字是「峡」。" }
-  ]
-};
-
-const KIND_LABEL = { true: "真线索", false: "干扰", hint: "交换提示" };
-
-const ENTRIES = [
-  { no: "1", title: "秘密任务", route: "#/secret", open: "#/secret/sample", openLabel: "预览", who: "全体各扫一次", file: "01-秘密任务.png" },
-  { no: "2", title: "A队情报", route: "#/clue/A", who: "建议队长保管", file: "02-A队情报.png" },
-  { no: "3", title: "B队情报", route: "#/clue/B", who: "建议队长保管", file: "03-B队情报.png" },
-  { no: "4", title: "C队情报", route: "#/clue/C", who: "建议队长保管", file: "04-C队情报.png" },
-  { no: "5", title: "D队情报", route: "#/clue/D", who: "建议队长保管", file: "05-D队情报.png" },
-  { no: "6", title: "E队情报", route: "#/clue/E", who: "建议队长保管", file: "06-E队情报.png" },
-  { no: "7", title: "F队情报", route: "#/clue/F", who: "建议队长保管", file: "07-F队情报.png" },
-  { no: "8", title: "G队情报", route: "#/clue/G", who: "建议队长保管", file: "08-G队情报.png" },
-  { no: "9", title: "H队情报", route: "#/clue/H", who: "建议队长保管", file: "09-H队情报.png" },
-  { no: "10", title: "终局解密", route: "#/final", who: "到集合点再发", file: "10-终局解密.png" }
-];
+const STATE_KEY = "haibu-hike-2026-v1";
+const DEVICE_KEY = "haibu-hike-device";
+const ADMIN_KEY = "haibu-hike-admin";
 
 const app = document.getElementById("app");
-let memorySecret = null;
-let sessionPhotoUrl = "";
-let storageOk = true;
+let meta = null;
+let suggestedBase = "";
+let serverError = "";
+let flashMessage = "";
+let pullKey = "";
+let pending = false;
+let pickingTeam = false;
+let adminPassword = "";
+let adminBoard = null;
+let adminLoading = false;
+let pollTimer = 0;
+let fillToken = 0;
+let gateContent = null;
+let qrBase = "";
 
 function esc(value) {
-  return String(value).replace(/[&<>"']/g, (ch) => ({
+  return String(value == null ? "" : value).replace(/[&<>"']/g, (ch) => ({
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
@@ -121,364 +28,651 @@ function esc(value) {
   }[ch]));
 }
 
+function pointsText(value) {
+  const rounded = Math.round(Number(value || 0) * 10) / 10;
+  return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
+}
+
+function whenText(stamp) {
+  if (!stamp) return "还没有";
+  return new Date(stamp).toLocaleString("zh-CN", { hour12: false });
+}
+
+function emptyState() {
+  return {
+    team: "",
+    secretClaimed: false,
+    secretDone: false,
+    secretNote: "",
+    secretTask: null,
+    reportTeam: "",
+    reportNote: "",
+    reportOk: false,
+    gates: {},
+    review: {},
+    scores: null,
+    openGates: [1]
+  };
+}
+
+function loadState() {
+  try {
+    const data = JSON.parse(localStorage.getItem(STATE_KEY) || "null");
+    if (data && typeof data === "object") return Object.assign(emptyState(), data);
+  } catch (err) { /* 这部手机记不住时，只留在本次打开里 */ }
+  return emptyState();
+}
+
+function saveState(state) {
+  try { localStorage.setItem(STATE_KEY, JSON.stringify(state)); } catch (err) { /* 忽略 */ }
+}
+
+function deviceId() {
+  try {
+    const saved = localStorage.getItem(DEVICE_KEY) || "";
+    if (/^[A-Za-z0-9_-]{8,80}$/.test(saved)) return saved;
+    const created = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2)).replace(/-/g, "");
+    localStorage.setItem(DEVICE_KEY, created);
+    return created;
+  } catch (err) {
+    return "memory" + Date.now().toString(36);
+  }
+}
+
 function parseRoute() {
   let raw = location.hash || "#/";
-  try {
-    raw = decodeURIComponent(raw);
-  } catch (err) {
-    raw = location.hash || "#/";
-  }
+  try { raw = decodeURIComponent(raw); } catch (err) { raw = location.hash || "#/"; }
   const parts = raw.replace(/^#/, "").split("/").filter(Boolean);
   if (parts.length === 0) return { name: "home" };
-  if (parts[0] === "console") return { name: "console" };
-  if (parts[0] === "secret" && parts[1] === "sample") return { name: "sample" };
+  if (parts[0] === "admin" || parts[0] === "console") return { name: "admin" };
   if (parts[0] === "secret") return { name: "secret" };
-  if (parts[0] === "final") return { name: "final" };
-  if (parts[0] === "clue" && parts[1] && TEAMS[parts[1].toUpperCase()]) {
-    return { name: "clue", team: parts[1].toUpperCase() };
-  }
+  if (parts[0] === "score") return { name: "score" };
+  if (parts[0] === "gates") return { name: "gates" };
+  if (parts[0] === "gate" && /^[1-5]$/.test(parts[1] || "")) return { name: "gate", id: Number(parts[1]) };
   return { name: "missing" };
 }
 
-function isStaffBrowser() {
+function currentKey() {
+  const route = parseRoute();
+  return route.name + (route.id ? "/" + route.id : "") + ":" + (loadState().team || "");
+}
+
+function isOpen(state, id) {
+  return (state.openGates || [1]).map(Number).includes(Number(id));
+}
+
+function localProgress(state) {
+  return !!(state.secretClaimed || Object.keys(state.gates || {}).length);
+}
+
+async function postJson(url, body) {
+  let response;
   try {
-    return sessionStorage.getItem(STAFF_FLAG) === "1";
+    response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body || {})
+    });
   } catch (err) {
-    return false;
+    throw new Error("没连上计分服务");
+  }
+  let data = {};
+  try { data = await response.json(); } catch (err) { data = {}; }
+  if (!response.ok) {
+    const error = new Error(data.error || "提交失败");
+    error.status = response.status;
+    error.boundTeam = data.boundTeam || "";
+    throw error;
+  }
+  return data;
+}
+
+function applyServer(state, data) {
+  const raw = data.raw || {};
+  if (data.team) state.team = String(data.team);
+  state.secretClaimed = !!raw.secretClaimed;
+  state.secretDone = !!raw.secretDone;
+  state.secretNote = raw.secretNote || "";
+  state.secretTask = data.secret || null;
+  state.reportTeam = raw.reportTeam || "";
+  state.reportNote = raw.reportNote || "";
+  state.reportOk = !!raw.reportOk;
+  state.gates = raw.gates || {};
+  state.review = data.review || {};
+  state.scores = data.scores || null;
+  state.openGates = data.openGates || [1];
+}
+
+async function sync(eventName, payload) {
+  const state = loadState();
+  const data = await postJson("/api/sync", {
+    deviceId: deviceId(),
+    team: state.team,
+    event: eventName,
+    state: payload || {}
+  });
+  applyServer(state, data);
+  saveState(state);
+  if (data.message) flashMessage = data.message;
+  pullKey = currentKey();
+}
+
+async function pull() {
+  let state = loadState();
+  if (!state.team) return;
+  try {
+    const data = await postJson("/api/pull", { team: state.team, deviceId: deviceId() });
+    state = loadState();
+    applyServer(state, data);
+    saveState(state);
+    serverError = "";
+  } catch (err) {
+    if (!err.boundTeam) throw err;
+    state = loadState();
+    state.team = String(err.boundTeam);
+    saveState(state);
+    const data = await postJson("/api/pull", { team: state.team, deviceId: deviceId() });
+    applyServer(state, data);
+    saveState(state);
+    serverError = "";
   }
 }
 
-function loadSecret() {
-  try {
-    const raw = localStorage.getItem(SECRET_KEY);
-    if (raw) {
-      const data = JSON.parse(raw);
-      if (data && Number.isInteger(data.taskId) && TASKS[data.taskId]) return data;
-    }
-  } catch (err) {
-    storageOk = false;
-  }
-  return memorySecret;
-}
-
-function saveSecret(data) {
-  memorySecret = data;
-  try {
-    localStorage.setItem(SECRET_KEY, JSON.stringify(data));
-    storageOk = true;
-  } catch (err) {
-    storageOk = false;
-  }
-}
-
-function loadFinal() {
-  try {
-    const data = JSON.parse(sessionStorage.getItem(FINAL_KEY) || "null");
-    return data && data.ok ? data : null;
-  } catch (err) {
-    return null;
-  }
-}
-
-function defaultBase() {
-  if (location.protocol === "file:") return "";
-  const url = new URL(location.href);
-  url.hash = "";
-  url.search = "";
-  if (!url.pathname.endsWith("/")) url.pathname = url.pathname.replace(/[^/]*$/, "");
-  return url.toString();
-}
-
-function baseNeedsWarning(base) {
-  const value = base.trim();
-  if (!value || location.protocol === "file:") return true;
-  const withProtocol = /^https?:\/\//i.test(value) ? value : "http://" + value;
-  return /^https?:\/\/(localhost|127\.0\.0\.1)(?::|\/|$)/i.test(withProtocol);
-}
-
-function syncBaseWarning(base) {
-  const warn = document.getElementById("base-warn");
-  if (warn) warn.hidden = !baseNeedsWarning(base);
-}
-
-function currentBase() {
-  try {
-    const saved = sessionStorage.getItem(BASE_KEY);
-    if (saved !== null) return saved;
-  } catch (err) {
-    // 继续用当前地址。
-  }
-  return defaultBase();
-}
-
-function joinUrl(base, route) {
-  let clean = base.trim();
-  if (!clean) return "";
-  if (!/^https?:\/\//i.test(clean)) clean = "http://" + clean;
-  clean = clean.replace(/#.*$/, "");
-  let url;
-  try {
-    url = new URL(clean);
-  } catch (err) {
-    return "";
-  }
-  const hash = route.charAt(0) === "#" ? route : "#" + route;
-  const last = url.pathname.split("/").filter(Boolean).pop() || "";
-  if (last.indexOf(".") === -1 && !url.pathname.endsWith("/")) url.pathname += "/";
-  url.hash = hash;
-  return url.toString();
-}
-
-function page(title, body, wide) {
-  const staffLink = isStaffBrowser()
-    ? '<a class="back no-print" href="#/console">返回工作人员台</a>'
-    : "";
+function page(title, body, opts) {
+  const options = opts || {};
+  const state = loadState();
+  const eyebrow = options.eyebrow || (state.team ? "第 " + state.team + " 组" : "石林峡徒步");
+  const flash = options.flash || "";
   return `
-    <main class="sheet${wide ? " wide" : ""}">
-      ${staffLink}
+    <main class="sheet${options.wide ? " wide" : ""}">
       <header class="mast">
         <div class="seal">海步</div>
         <div>
-          <p class="eyebrow">奔跑吧 · 石林峡</p>
+          <p class="eyebrow">${esc(eyebrow)}</p>
           <h1>${esc(title)}</h1>
         </div>
       </header>
+      ${serverError ? `<div class="callout warn page-alert"><strong>${esc(serverError)}</strong></div>` : ""}
+      ${flash ? `<div class="callout page-alert"><p>${esc(flash)}</p></div>` : ""}
       ${body}
     </main>`;
 }
 
-function homeHtml() {
-  return page("峡谷情报争夺战", `
-    <section class="hero">
-      <p class="lede">海步医药轻徒步团建。大约 85 人、8 支队伍。手机扫码领任务、看本队线索，终点拼出四个字。</p>
-      <ol class="steps">
-        <li><span class="num">1</span><span>工作人员在工作台生成 10 张二维码，打印或投到只给队长看的屏幕上。</span></li>
-        <li><span class="num">2</span><span>每人扫秘密任务。各队只看自己的情报，再当面交换。</span></li>
-        <li><span class="num">3</span><span>到集合点扫终局码。密码对了，把页面给裁判看。积分仍由工作人员手工记。</span></li>
-      </ol>
-      <div class="actions">
-        <a class="btn" href="#/console">打开工作人员台</a>
-      </div>
-      <p class="fine" style="margin-top:14px">队员不用打开这一页，直接扫现场发的码。窄路和陡坡不要停下来看手机。</p>
-    </section>
-  `);
+function needTeam() {
+  return page("先选本组", `
+    <section class="card">
+      <p>每组用队长的一部手机。选完就会锁在这部手机上。</p>
+      <div class="actions"><a class="btn" href="#/">去选择</a></div>
+    </section>`);
 }
 
-function secretCard(data, preview) {
-  const task = TASKS[data.taskId];
-  const status = data.done ? "已完成" : "未完成";
-  const photo = sessionPhotoUrl && !preview
-    ? `<img class="photo-preview" alt="刚才选择的证明照片" src="${esc(sessionPhotoUrl)}">`
+function homeHtml(state, flash) {
+  if (!state.team || pickingTeam) {
+    return page("选择本组", `
+      <section class="card">
+        <p>六组都参加闯关。第 1 组到第 5 组可以领取秘密任务，第 6 组不领。</p>
+        <form class="stack" data-form="team">
+          <label>本组
+            <select name="team" required>
+              <option value="">请选择</option>
+              ${["1", "2", "3", "4", "5", "6"].map((id) => `<option value="${id}" ${state.team === id ? "selected" : ""}>第 ${id} 组</option>`).join("")}
+            </select>
+          </label>
+          <p class="bad-text" data-error hidden></p>
+          <button class="btn" type="submit">${state.team ? "改到这一组" : "确定本组"}</button>
+        </form>
+      </section>`, { flash });
+  }
+  const done = [1, 2, 3, 4, 5].filter((id) => {
+    const review = (state.review || {})[String(id)] || {};
+    return id === 5 ? review.orderOk : review.submitted;
+  }).length;
+  const total = state.scores ? state.scores.total : 0;
+  return page("徒步计分", `
+    <section class="hero">
+      <p class="lede">已完成 ${done} / 5 关 · 当前 ${pointsText(total)} 分</p>
+      <div class="doors">
+        <a class="door" href="#/secret"><strong>秘密任务</strong><span>五个组各领一条，完成后 10 分</span></a>
+        <a class="door" href="#/gates"><strong>闯关任务</strong><span>做完当前关，才看下一关</span></a>
+      </div>
+      <div class="actions">
+        <a class="btn" href="#/score">看成绩单</a>
+        ${localProgress(state) ? "" : '<button class="btn-ghost" type="button" data-action="repick">选错组了</button>'}
+      </div>
+      <p class="fine" style="margin-top:14px">照片和视频发到队伍群。这一页只记完成情况和分数。</p>
+      <p class="fine"><a class="back" href="#/admin">工作人员入口</a></p>
+    </section>`, { flash });
+}
+
+function secretHtml(state, flash) {
+  if (!state.team) return needTeam();
+  if (state.team === "6") {
+    return page("秘密任务", `
+      <section class="card">
+        <p>第 6 组不领取秘密任务。请去做闯关。</p>
+        <div class="actions"><a class="btn" href="#/gates">去闯关</a></div>
+      </section>`, { flash });
+  }
+  if (!state.secretClaimed || !state.secretTask) {
+    return page("秘密任务", `
+      <section class="card">
+        <p>这条任务只给第 ${esc(state.team)} 组。领到之后不要直接说出来。做完把凭证发到队伍群，再回来勾选。</p>
+        <div class="actions"><button class="btn" type="button" data-action="claim-secret">领取本组任务</button></div>
+        <p class="bad-text" data-error hidden></p>
+      </section>`, { flash });
+  }
+  const task = state.secretTask;
+  return page("秘密任务", `
+    <article class="card task">
+      <p class="task-no">${esc(task.id)} · ${esc(task.proof)} · 10 分</p>
+      <p>${esc(task.text)}</p>
+    </article>
+    <p class="fine">不要直接说出任务。有人说破的话，可以在下面举报，裁判确认后举报方加 20 分。</p>
+    <form class="stack" data-form="secret">
+      <label>完成说明
+        <textarea name="note" maxlength="200">${esc(state.secretNote)}</textarea>
+      </label>
+      <label class="choice"><input type="checkbox" name="done" ${state.secretDone ? "checked" : ""}><span>已完成，请裁判看本组记录</span></label>
+      <p class="bad-text" data-error hidden></p>
+      <button class="btn" type="submit">保存秘密任务</button>
+    </form>
+    <form class="stack" data-form="report">
+      <h2>举报泄密</h2>
+      <label>被举报的组
+        <select name="reportTeam">
+          <option value="">未选</option>
+          ${["1", "2", "3", "4", "5"].filter((id) => id !== state.team).map((id) => `<option value="${id}" ${state.reportTeam === id ? "selected" : ""}>第 ${id} 组</option>`).join("")}
+        </select>
+      </label>
+      <label>看到了什么
+        <textarea name="reportNote" maxlength="200">${esc(state.reportNote)}</textarea>
+      </label>
+      <button class="btn" type="submit">提交给裁判</button>
+      <p class="fine">${state.reportOk ? "裁判已确认，举报方加 20 分。" : "确认前不加分。"}</p>
+    </form>
+    <div class="actions"><a class="btn-ghost" href="#/">回首页</a></div>`, { flash });
+}
+
+function gatesHtml(state, flash) {
+  if (!state.team) return needTeam();
+  const rows = (meta.gates || []).map((gate) => {
+    const open = isOpen(state, gate.id);
+    const review = (state.review || {})[String(gate.id)] || {};
+    const finished = gate.id === 5 ? review.orderOk : review.submitted;
+    const status = finished ? "已记 " + pointsText((state.scores && state.scores.gates[String(gate.id)]) || 0) + " 分" : (open ? "可以开始" : "完成上一关后开放");
+    const inner = `<span class="task-no">第 ${gate.id} 关 · ${esc(gate.place)}</span><strong>${esc(gate.title)}</strong><span class="fine">${esc(status)}</span>`;
+    return open
+      ? `<a class="door" href="#/gate/${gate.id}">${inner}</a>`
+      : `<div class="door lock-card">${inner}</div>`;
+  }).join("");
+  return page("闯关任务", `<div class="doors">${rows}</div><div class="actions"><a class="btn-ghost" href="#/">回首页</a></div>`, { flash });
+}
+
+function choice(name, value, label, current) {
+  const text = value === label ? label : value + ". " + label;
+  return `<label class="choice"><input type="radio" name="${esc(name)}" value="${esc(value)}" ${current === value ? "checked" : ""} required><span>${esc(text)}</span></label>`;
+}
+
+function check(name, label, on) {
+  return `<label class="choice"><input type="checkbox" name="${esc(name)}" ${on ? "checked" : ""}><span>${esc(label)}</span></label>`;
+}
+
+function quizMark(state, name) {
+  const items = (((state.review || {})["1"] || {}).items) || [];
+  const item = items.find((row) => row.name === name);
+  if (!item || item.ok == null) return "";
+  return item.ok ? ' <span class="tag ok">答对</span>' : ' <span class="tag bad">答错</span>';
+}
+
+function gateForm(content, state) {
+  const saved = (state.gates || {})[String(content.id)] || {};
+  let fields = "";
+  if (content.type === "quiz") {
+    fields = content.questions.map((question) => `
+      <section class="card">
+        <p class="task-no">${esc(question.title)} · 5 分${quizMark(state, question.name)}</p>
+        <p>${esc(question.prompt)}</p>
+        <div class="stack">${question.options.map(([value, label]) => choice(question.name, value, label, ((saved.answers || {})[question.name]))).join("")}</div>
+      </section>`).join("");
+  } else if (content.type === "theme") {
+    fields = `
+      <div class="stack">${content.themes.map((theme) => `
+        <label class="choice"><input type="radio" name="theme" value="${esc(theme.id)}" ${saved.theme === theme.id ? "checked" : ""} required><span><strong>${esc(theme.title)}</strong><br>${esc(theme.text)}</span></label>
+      `).join("")}</div>
+      <div class="stack">${content.checks.map((item) => check(item.name, item.label, saved[item.name])).join("")}</div>`;
+  } else if (content.type === "spots") {
+    fields = content.spots.map((spot) => `
+      <section class="card">
+        <p class="task-no">${esc(spot.title)} · ${pointsText(spot.points)} 分</p>
+        <p>${esc(spot.text)}</p>
+        ${check(spot.name, "我们拍好了", !!saved[spot.name])}
+      </section>`).join("");
+  } else {
+    const review = (state.review || {})["5"] || {};
+    const piece = review.orderOk
+      ? `<section class="card"><p class="task-no">本组碎片</p><p>${review.fragment ? esc(review.fragment) : "本组没有碎片，可以和其他组一起把口号交上去。"}</p></section>`
+      : "";
+    fields = `
+      ${[0, 1, 2, 3].map((index) => `
+        <label>第 ${index + 1} 步
+          <select name="step${index}" required>
+            <option value="">请选择</option>
+            ${content.steps.map((step) => `<option value="${esc(step)}" ${(saved.order || [])[index] === step ? "selected" : ""}>${esc(step)}</option>`).join("")}
+          </select>
+        </label>`).join("")}
+      ${piece}
+      ${review.orderOk ? `<label>拼好的口号<input name="slogan" maxlength="20" value="${esc(saved.slogan || "")}" placeholder="八个字" autocomplete="off"></label>` : ""}
+      ${review.sloganOk ? `<p class="fine">口号已对上。当前名次分 ${pointsText(state.scores ? state.scores.slogan : 0)}。</p>` : ""}`;
+  }
+  const review = (state.review || {})[String(content.id)] || {};
+  const noted = review.submitted || review.orderOk
+    ? `<p class="fine">这一关目前计入 ${pointsText(review.score || 0)} 分。</p>`
     : "";
   return `
-    <article class="card task">
-      <p class="task-no">${preview ? "预览" : "任务 " + (data.taskId + 1)}</p>
-      <p>${esc(task)}</p>
-    </article>
-    ${preview ? '<p class="note">这是样式预览，不会记到这台手机上。正式二维码请让队员自己扫。</p>' : `
-    <form class="stack" data-form="secret">
-      <div class="row">
-        <label>姓名（选填）<input name="name" maxlength="20" value="${esc(data.name || "")}" placeholder="裁判核对用"></label>
-        <label>队伍（选填）
-          <select name="team">
-            <option value="">未选</option>
-            ${Object.keys(TEAMS).map((id) => `<option value="${id}"${data.team === id ? " selected" : ""}>${id}队</option>`).join("")}
-          </select>
-        </label>
-      </div>
-      <label>完成说明
-        <textarea name="note" maxlength="200" placeholder="用一两句话写你做了什么">${esc(data.note || "")}</textarea>
-      </label>
-      <label class="no-print">证明照片（只留在这次打开里，不会上传）
-        <input name="photo" type="file" accept="image/*" capture="environment">
-      </label>
-      ${photo}
-      <div class="actions">
-        <button class="btn" type="submit">${data.done ? "更新完成记录" : "标记完成"}</button>
-        <span class="status ${data.done ? "done" : "wait"}">${status}</span>
-      </div>
-      <p class="fine">${storageOk
-        ? "完成后把这个页面给裁判看。不要把任务截图发到群里。刷新不会换任务。"
-        : "这部手机没有记下任务，刷新可能会换成另一条。请先把页面给裁判看。"}</p>
-    </form>`}
-  `;
+    <p>${esc(content.intro || "")}</p>
+    <form class="stack" data-form="gate" data-gate="${esc(content.id)}">
+      ${fields}
+      ${noted}
+      <p class="bad-text" data-error hidden></p>
+      <button class="btn" type="submit">提交这一关</button>
+    </form>`;
 }
 
-function secretHtml() {
-  const data = loadSecret();
-  const body = data
-    ? secretCard(data, false)
-    : `
-      <section class="card">
-        <p class="lede">扫到这里的人，每人领一条只属于这台手机的秘密任务。点下去之后就会定住。</p>
-        <div class="actions"><button class="btn" type="button" data-action="claim">领取我的任务</button></div>
-      </section>
-      <p class="fine">任务可能和别人重复。裁判看完成情况给分。请在安全、宽敞的地方看手机。</p>`;
-  return page("秘密任务", body);
+function gateShell(state, id, flash) {
+  const info = (meta.gates || []).find((gate) => gate.id === id) || { title: "闯关", place: "" };
+  const next = id < 5 && isOpen(state, id + 1);
+  return page("第 " + id + " 关 · " + info.title, `
+    <p class="fine">${esc(info.place || "")}</p>
+    <div id="gate-body"><p>正在取出这一关。</p></div>
+    <div class="actions">
+      ${next ? `<a class="btn" href="#/gate/${id + 1}">下一关</a>` : ""}
+      <a class="btn-ghost" href="#/gates">全部关卡</a>
+      <a class="btn-ghost" href="#/score">成绩单</a>
+    </div>`, { flash });
 }
 
-function sampleHtml() {
-  return page("秘密任务", secretCard({ taskId: 0, name: "林夏", team: "A", note: "", done: false }, true));
-}
-
-function clueHtml(team) {
-  const clues = TEAMS[team].map((clue, index) => `
-    <li><span class="k">线索 ${index + 1}</span>${esc(clue.text)}</li>
-  `).join("");
-  return page(team + "队情报", `
-    <section class="card">
-      <p class="lede">这三张只给 ${esc(team)} 队。可以口头交换，尽量别把整页亮给别的队。</p>
-      <ol class="clue-list">${clues}</ol>
-    </section>
-    <p class="fine">三条里有真有假。终局密码要八队合在一起才完整。</p>
-  `);
-}
-
-function finalHtml() {
-  const saved = loadFinal();
-  const body = saved ? successBlock(saved) : `
-    <section class="card">
-      <p class="lede">八队情报拼成一句话。把四个汉字交给这里。</p>
-      <form class="stack" data-form="final">
-        <label>队伍
-          <select name="team">
-            <option value="">未选</option>
-            ${Object.keys(TEAMS).map((id) => `<option value="${id}">${id}队</option>`).join("")}
-          </select>
-        </label>
-        <label>密码
-          <input name="password" maxlength="12" autocomplete="off" placeholder="四个汉字" enterkeyhint="done">
-        </label>
-        <button class="btn" type="submit">提交密码</button>
-        <p class="bad-text" id="final-msg" hidden></p>
-      </form>
-    </section>`;
-  return page("终局解密", body);
-}
-
-function successBlock(data) {
-  const who = data.team ? data.team + "队" : "你们";
-  return `
+function scoreHtml(state, flash) {
+  if (!state.team) return needTeam();
+  const scores = state.scores || { secret: 0, report: 0, gates: {}, slogan: 0, total: 0 };
+  const rows = [
+    ["秘密任务", scores.secret, 10],
+    ["第 1 关 峡谷密码", scores.gates["1"], 20],
+    ["第 2 关 玻璃步道", scores.gates["2"], 20],
+    ["第 3 关 彩虹池", scores.gates["3"], 30],
+    ["第 4 关 寻宝", scores.gates["4"], 30],
+    ["第 5 关 排序", scores.gates["5"], 20],
+    ["口号名次", scores.slogan, 10],
+    ["举报", scores.report, 20]
+  ];
+  const review = (state.review || {})["5"] || {};
+  return page("第 " + state.team + " 组成绩", `
     <section class="card result">
-      <div class="stamp">破解</div>
-      <h2>对上了</h2>
-      <p>${esc(who)}拼出的密码是「${esc(PASSWORD)}」。</p>
-      <p class="fine">把这个页面给裁判看。排名和加分由工作人员当场宣布。</p>
-    </section>`;
-}
-
-function consoleHtml() {
-  const base = currentBase();
-  const fileMode = location.protocol === "file:";
-  const localHost = /^https?:\/\/(localhost|127\.0\.0\.1)/i.test(base);
-  const showWarn = fileMode || localHost || !base;
-  const warn = `<div class="callout warn no-print" id="base-warn"${showWarn ? "" : " hidden"}>
-        <strong>手机还扫不开。</strong>
-        <p>二维码里的地址必须是队员手机打得开的网址。直接双击文件，或用 localhost，手机都不认。</p>
-        <p>在这个文件夹打开终端，运行 <code>python3 -m http.server 8080</code>。电脑和手机连同一个 Wi-Fi，把下面地址改成 <code>http://电脑的局域网IP:8080</code>。</p>
-      </div>`;
-  const teams = Object.keys(TEAMS).map((id) => `
-    <section class="team-block">
-      <h3>${id}队</h3>
-      <div class="stack">
-        ${TEAMS[id].map((clue) => `<div class="key-clue ${clue.kind}"><span class="k">${KIND_LABEL[clue.kind]}</span>${esc(clue.text)}</div>`).join("")}
-      </div>
+      <div class="stamp">分</div>
+      <h2>${pointsText(scores.total)}</h2>
+      <p>把这一页给裁判看。口号名次和举报要等后台确认，点刷新就能看到新分数。</p>
     </section>
-  `).join("");
-  const pool = TASKS.map((task, index) => `<li><strong>${index + 1}.</strong> ${esc(task)}</li>`).join("");
-  return `
-    <main class="sheet wide">
-      <header class="mast">
-        <div class="seal">海步</div>
-        <div>
-          <p class="eyebrow">请勿投屏给全体队员</p>
-          <h1>工作人员台</h1>
-        </div>
-      </header>
-      <div class="jumps no-print">
-        <button class="btn-small" type="button" data-action="jump" data-target="qr-sheet">十张二维码</button>
-        <button class="btn-small" type="button" data-action="jump" data-target="key-sheet">线索总表</button>
-        <button class="btn-small" type="button" data-action="jump" data-target="task-pool">任务池</button>
-      </div>
-      ${warn}
-      <section class="section qr-only" id="qr-sheet">
-        <h2>十张二维码</h2>
-        <p class="lede">1 号全体领取秘密任务，2 到 9 号是八队情报，10 号到终点再打开。</p>
-        <label class="stack no-print">队员手机打得开的地址
-          <input id="base-url" value="${esc(base)}" placeholder="http://192.168.1.20:8080" autocomplete="off">
-        </label>
-        <div class="actions no-print">
-          <button class="btn" type="button" data-action="print-qr">打印二维码</button>
-          <button class="btn-ghost" type="button" data-action="use-here">填入当前网址</button>
-          <a class="btn-ghost" href="#/secret/sample">预览任务卡</a>
-        </div>
-        <div class="qr-grid" id="qr-grid"></div>
-      </section>
-      <section class="section key-only" id="key-sheet">
-        <h2>线索总表</h2>
-        <div class="callout">
-          <p>终局密码是 <strong>${esc(PASSWORD)}</strong>。页面核对只看四个字是否一致，分数请手工记。</p>
-          <p class="fine">判题备忘：心是 4 画，不是左右结构；林是 8 画，左右结构。致没有三点水，海有。远是走之底、7 画；步也是 7 画，但不是走之底；峡不是走之底。</p>
-        </div>
-        <div class="actions no-print">
-          <button class="btn-ghost" type="button" data-action="print-key">打印线索总表</button>
-          <button class="btn-ghost" type="button" data-action="clear-final">清空本机终局记录</button>
-          <button class="btn-ghost" type="button" data-action="clear-secret">清空本机秘密任务</button>
-        </div>
-        <div class="team-grid">${teams}</div>
-      </section>
-      <section class="section key-only" id="task-pool">
-        <h2>秘密任务池</h2>
-        <p class="note">共 ${TASKS.length} 条。每人第一次领取时随机抽一条，记在自己的手机里。85 人里会有重复，按完成情况给分。</p>
-        <div class="card pool"><ol>${pool}</ol></div>
-      </section>
-    </main>`;
-}
-
-function missingHtml() {
-  return page("这个入口没有对应环节", `
+    <ul class="score-list">
+      ${rows.map(([label, got, max]) => `<li><span>${esc(label)}</span><strong>${pointsText(got)} / ${max}</strong></li>`).join("")}
+      <li><span>合计</span><strong>${pointsText(scores.total)}</strong></li>
+    </ul>
     <section class="card">
-      <p>请回到现场二维码再扫一次。工作人员从首页进入工作台。</p>
-      <div class="actions"><a class="btn" href="#/">回到首页</a></div>
+      <p>口号：${esc(review.slogan || "还没提交")} · ${review.sloganOk ? "八个字正确" : "尚未对上"} · ${esc(whenText(review.sloganAt))}</p>
+      ${state.reportTeam ? `<p>已举报第 ${esc(state.reportTeam)} 组：${esc(state.reportNote || "未写说明")}</p>` : ""}
     </section>
-  `);
+    <div class="actions">
+      <button class="btn" type="button" data-action="reload">刷新成绩</button>
+      <a class="btn-ghost" href="#/">回首页</a>
+    </div>`, { flash });
+}
+
+function itemsHtml(items) {
+  return (items || []).map((item) => {
+    const flag = item.ok === true ? '<span class="tag ok">对</span>' : item.ok === false ? '<span class="tag bad">错</span>' : "";
+    const answer = item.answer ? " · 答案 " + item.answer : "";
+    const points = item.points != null ? " · " + pointsText(item.points) + " 分" : "";
+    return `<li><span class="k">${esc(item.label)}</span>${esc(item.value || "未填")}${answer ? esc(answer) : ""} ${points ? esc(points) : ""} ${flag}</li>`;
+  }).join("");
+}
+
+function teamCard(row) {
+  const secretLine = row.secret
+    ? `${row.secret.id} ${row.secret.text}（${row.secretClaimed ? "已领" : "未领"}，${row.secretDone ? "已完成" : "未完成"}）`
+    : "本组不领取秘密任务";
+  const gates = [1, 2, 3, 4, 5].map((id) => {
+    const review = (row.review || {})[String(id)] || {};
+    const auto = (row.scores.auto || {})[String(id)];
+    return `
+      <section class="card">
+        <p class="task-no">第 ${id} 关 · 计入 ${pointsText(review.score)} 分 · 自动 ${pointsText(auto)} 分${review.override ? " · 已核定" : ""}</p>
+        <p class="fine">${esc(whenText(review.at))}</p>
+        <ol class="clue-list">${itemsHtml(review.items)}</ol>
+        ${id === 5 ? `<p>碎片：${esc(review.fragment || "无")} · ${review.fragmentOpen ? "已发给该组" : "还没排对"} · 口号 ${esc(review.slogan || "未填")} · ${review.sloganOk ? "正确" : "未对上"} · 名次分 ${pointsText(review.sloganPoints || 0)}</p>` : ""}
+        <label>核定分（留空就用自动分，排序这一栏最多 20）
+          <input class="score-input" name="adjust${id}" inputmode="decimal" value="${row.adjust && row.adjust[String(id)] != null ? esc(row.adjust[String(id)]) : ""}">
+        </label>
+      </section>`;
+  }).join("");
+  return `
+    <details class="card team-card">
+      <summary>第 ${esc(row.team)} 组 · ${pointsText(row.scores.total)} 分</summary>
+      <div class="stack">
+        <p>${esc(secretLine)}</p>
+        ${row.secretNote ? `<p>完成说明：${esc(row.secretNote)}</p>` : ""}
+        <p>举报：${row.reportTeam ? "第 " + esc(row.reportTeam) + " 组" : "无"} ${esc(row.reportNote || "")} ${row.reportOk ? "· 已加 20 分" : ""}</p>
+        <form class="stack" data-form="adjust" data-team="${esc(row.team)}">
+          ${gates}
+          <label class="choice"><input type="checkbox" name="reportOk" ${row.reportOk ? "checked" : ""}><span>确认举报，这一组加 20 分</span></label>
+          <p class="bad-text" data-error hidden></p>
+          <button class="btn" type="submit">保存第 ${esc(row.team)} 组</button>
+        </form>
+        <button class="btn-ghost" type="button" data-action="reset-team" data-team="${esc(row.team)}">清空这一组</button>
+      </div>
+    </details>`;
+}
+
+function adminHtml(flash) {
+  if (!adminPassword) {
+    return page("工作人员后台", `
+      <section class="card">
+        <p>查看六个组的提交情况和分数。密码写在服务器的 server.py 里。</p>
+        <form class="stack" data-form="login">
+          <label>密码
+            <input name="password" type="password" autocomplete="off" required>
+          </label>
+          <p class="bad-text" data-error hidden></p>
+          <button class="btn" type="submit">进入</button>
+        </form>
+      </section>`, { flash, wide: true, eyebrow: "工作人员" });
+  }
+  if (!adminBoard) {
+    return page("工作人员后台", `<section class="card"><p>正在读取各组成绩。</p></section>`, { flash, wide: true, eyebrow: "工作人员" });
+  }
+  const rows = adminBoard.ranking || [];
+  const here = location.protocol + "//" + location.host + "/";
+  const local = /localhost|127\.0\.0\.1/i.test(location.host);
+  const baseValue = qrBase || (local && suggestedBase ? suggestedBase : here);
+  const log = (adminBoard.log || []).slice(0, 30).map((item) =>
+    `<li>${esc(whenText(item.at))} · 第 ${esc(item.team)} 组 · ${esc(item.event)} · 当时 ${pointsText(item.total)} 分</li>`
+  ).join("");
+  const key = adminBoard.key || {};
+  return page("工作人员后台", `
+    <div class="actions no-print">
+      <button class="btn" type="button" data-action="refresh-admin">刷新</button>
+      <button class="btn-ghost" type="button" data-action="logout">退出</button>
+      <a class="btn-ghost" href="#/">选手首页</a>
+    </div>
+    <section class="card" id="qr-sheet">
+      <h2>现场二维码</h2>
+      <p>只贴这一张。扫开是首页，里面有秘密任务和闯关任务。</p>
+      ${local ? '<div class="callout warn page-alert"><strong>现在打开的是本机地址。</strong><p>手机请用下面这个局域网地址。电脑和手机要在同一个 Wi-Fi。</p></div>' : ""}
+      <label class="stack">手机打得开的地址
+        <input id="base-url" value="${esc(baseValue)}" autocomplete="off">
+      </label>
+      <div class="qr-grid" id="qr-grid"></div>
+    </section>
+    <h2>当前排名</h2>
+    <div class="table-wrap"><table class="board">
+      <thead><tr><th>名次</th><th>组</th><th>总分</th><th>秘密</th><th>举报</th><th>1</th><th>2</th><th>3</th><th>4</th><th>排序</th><th>口号</th><th>更新</th></tr></thead>
+      <tbody>${rows.map((row, index) => `<tr>
+        <td>${index + 1}</td>
+        <td>第 ${esc(row.team)} 组</td>
+        <td><strong>${pointsText(row.scores.total)}</strong></td>
+        <td>${pointsText(row.scores.secret)}</td>
+        <td>${pointsText(row.scores.report)}</td>
+        ${[1, 2, 3, 4, 5].map((id) => `<td>${pointsText(row.scores.gates[String(id)])}</td>`).join("")}
+        <td>${pointsText(row.scores.slogan)}</td>
+        <td>${esc(whenText(row.updatedAt))}</td>
+      </tr>`).join("")}</tbody>
+    </table></div>
+    ${rows.map(teamCard).join("")}
+    <section class="section">
+      <h2>最近提交</h2>
+      <ol class="log">${log || "<li>还没有提交</li>"}</ol>
+    </section>
+    <section class="section">
+      <h2>答案</h2>
+      <div class="card">
+        <ol>
+          ${(key.quiz || []).map((item) => `<li>${esc(item.title)}：${esc(item.answer)}</li>`).join("")}
+          <li>顺序：${esc((key.order || []).join(" → "))}</li>
+          <li>口号：${esc(key.slogan || "")}</li>
+          <li>碎片：${esc((key.fragments || []).map((item) => item.team + " " + item.text).join("，"))}。第 6 组没有碎片。</li>
+        </ol>
+        <ol class="clue-list">${(key.secrets || []).map((item) => `<li><span class="k">第 ${esc(item.team)} 组 ${esc(item.id)}</span>${esc(item.text)}</li>`).join("")}</ol>
+      </div>
+    </section>`, { flash, wide: true, eyebrow: "工作人员" });
+}
+
+function missingHtml(flash) {
+  return page("入口无效", `<section class="card"><div class="actions"><a class="btn" href="#/">回首页</a></div></section>`, { flash });
+}
+
+function stopPoll() {
+  if (pollTimer) clearInterval(pollTimer);
+  pollTimer = 0;
+}
+
+function startPoll() {
+  stopPoll();
+  pollTimer = window.setInterval(async () => {
+    const el = document.activeElement;
+    if (el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)) return;
+    if (parseRoute().name !== "admin" || !adminPassword) return;
+    try {
+      const board = await postJson("/api/admin/board", { password: adminPassword });
+      if (parseRoute().name !== "admin") return;
+      adminBoard = board;
+      const y = window.scrollY;
+      render();
+      window.scrollTo(0, y);
+    } catch (err) { /* 下一轮再读 */ }
+  }, 8000);
 }
 
 function render() {
+  stopPoll();
   const route = parseRoute();
-  if (route.name === "console") {
-    try { sessionStorage.setItem(STAFF_FLAG, "1"); } catch (err) { /* 没有存储也不影响出码 */ }
+  const state = loadState();
+  const flash = flashMessage;
+  flashMessage = "";
+  document.title = route.name === "admin" ? "工作人员后台" : "石林峡徒步计分";
+  if (route.name === "admin") {
+    app.innerHTML = adminHtml(flash);
+    if (adminPassword && adminBoard) {
+      mountQr();
+      startPoll();
+    } else if (adminPassword && !adminBoard && !adminLoading) {
+      adminLoading = true;
+      postJson("/api/admin/board", { password: adminPassword }).then((board) => {
+        adminBoard = board;
+        serverError = "";
+        render();
+      }).catch((err) => {
+        adminPassword = "";
+        adminBoard = null;
+        try { sessionStorage.removeItem(ADMIN_KEY); } catch (ignore) { /* 忽略 */ }
+        serverError = err.status === 401 ? "密码不对" : (err.message || "后台没有打开");
+        render();
+      }).finally(() => { adminLoading = false; });
+    }
+    return;
   }
-  const titles = {
-    home: "峡谷情报争夺战",
-    console: "工作人员台",
-    secret: "秘密任务",
-    sample: "秘密任务预览",
-    final: "终局解密",
-    clue: route.team ? route.team + "队情报" : "情报",
-    missing: "入口无效"
-  };
-  document.title = titles[route.name] || "峡谷情报争夺战";
-  if (route.name === "home") app.innerHTML = homeHtml();
-  else if (route.name === "console") app.innerHTML = consoleHtml();
-  else if (route.name === "secret") app.innerHTML = secretHtml();
-  else if (route.name === "sample") app.innerHTML = sampleHtml();
-  else if (route.name === "clue") app.innerHTML = clueHtml(route.team);
-  else if (route.name === "final") app.innerHTML = finalHtml();
-  else app.innerHTML = missingHtml();
-  if (route.name === "console") mountQr(currentBase());
-  const heading = app.querySelector("h1");
-  if (heading) heading.tabIndex = -1;
+  let fillId = 0;
+  if (!meta) {
+    app.innerHTML = page("石林峡徒步", `<section class="card"><p>请让工作人员先运行 python server.py，再用终端里打印的网址打开。</p></section>`, { flash });
+  } else if (route.name === "home") app.innerHTML = homeHtml(state, flash);
+  else if (route.name === "secret") app.innerHTML = secretHtml(state, flash);
+  else if (route.name === "gates") app.innerHTML = gatesHtml(state, flash);
+  else if (route.name === "score") app.innerHTML = scoreHtml(state, flash);
+  else if (route.name === "gate") {
+    if (!state.team) app.innerHTML = needTeam();
+    else if (!isOpen(state, route.id)) {
+      app.innerHTML = page("这一关还没开放", `<section class="card"><p>先提交上一关，再回来。</p><div class="actions"><a class="btn" href="#/gates">返回关卡</a></div></section>`, { flash });
+    } else {
+      gateContent = null;
+      app.innerHTML = gateShell(state, route.id, flash);
+      fillId = route.id;
+    }
+  } else app.innerHTML = missingHtml(flash);
+  if (fillId) fillGate(fillId);
+  const key = currentKey();
+  if (state.team && pullKey !== key) {
+    pullKey = key;
+    pull().then(() => {
+      if (currentKey() !== key) return;
+      const el = document.activeElement;
+      if (el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)) return;
+      render();
+    }).catch((err) => {
+      if (currentKey() !== key) return;
+      serverError = err.message || "没能同步成绩";
+      render();
+    });
+  }
+}
+
+async function fillGate(id) {
+  const token = ++fillToken;
+  try {
+    const content = await postJson("/api/gate-content", {
+      team: loadState().team,
+      deviceId: deviceId(),
+      gate: id
+    });
+    if (token !== fillToken) return;
+    content.id = id;
+    gateContent = content;
+    const host = document.getElementById("gate-body");
+    if (!host) return;
+    host.innerHTML = gateForm(content, loadState());
+  } catch (err) {
+    if (token !== fillToken) return;
+    const host = document.getElementById("gate-body");
+    if (host) host.innerHTML = `<p class="bad-text">${esc(err.message || "这一关没有打开")}</p>`;
+  }
+}
+
+function normalizeBase(value) {
+  let clean = String(value || "").trim();
+  if (!clean) return "";
+  if (!/^https?:\/\//i.test(clean)) clean = "http://" + clean;
+  try {
+    const url = new URL(clean);
+    url.hash = "#/";
+    url.search = "";
+    return url.toString();
+  } catch (err) {
+    return "";
+  }
 }
 
 function makeQrCanvas(text) {
-  if (typeof qrcode !== "function") throw new Error("二维码组件没有加载");
   qrcode.stringToBytes = qrcode.stringToBytesFuncs["UTF-8"];
-  const qr = qrcode(0, "Q");
+  const qr = qrcode(0, "M");
   qr.addData(text);
   qr.make();
   const count = qr.getModuleCount();
-  const scale = 12;
+  const scale = 8;
   const margin = 4;
   const size = (count + margin * 2) * scale;
   const canvas = document.createElement("canvas");
@@ -490,227 +684,219 @@ function makeQrCanvas(text) {
   ctx.fillStyle = "#143528";
   for (let row = 0; row < count; row += 1) {
     for (let col = 0; col < count; col += 1) {
-      if (qr.isDark(row, col)) {
-        ctx.fillRect((col + margin) * scale, (row + margin) * scale, scale, scale);
-      }
+      if (qr.isDark(row, col)) ctx.fillRect((col + margin) * scale, (row + margin) * scale, scale, scale);
     }
   }
   return canvas;
 }
 
-function mountQr(base) {
+function mountQr() {
   const grid = document.getElementById("qr-grid");
-  if (!grid) return;
-  grid.innerHTML = ENTRIES.map((entry) => {
-    const url = joinUrl(base, entry.route);
-    return `
-      <article class="qr-card" data-route="${esc(entry.route)}">
-        <strong>${esc(entry.no)} · ${esc(entry.title)}</strong>
-        <div class="qr-box"></div>
-        <span class="fine">${esc(entry.who)}</span>
-        <span class="url">${url ? esc(url) : "先填写上面的地址"}</span>
-        <div class="actions no-print">
-          <button class="btn-small" type="button" data-action="copy-link" data-url="${esc(url)}" ${url ? "" : "disabled"}>复制链接</button>
-          <button class="btn-small" type="button" data-action="download-qr" data-url="${esc(url)}" data-filename="${esc(entry.file)}" ${url ? "" : "disabled"}>下载</button>
-          <a class="btn-small" href="${esc(entry.open || entry.route)}">${esc(entry.openLabel || "本机打开")}</a>
-        </div>
-      </article>`;
-  }).join("");
-  grid.querySelectorAll(".qr-card").forEach((card) => {
-    const button = card.querySelector("[data-action='download-qr']");
-    const url = button ? button.getAttribute("data-url") : "";
-    const box = card.querySelector(".qr-box");
-    if (!url) {
-      box.textContent = "地址空着";
-      return;
-    }
-    try {
-      const canvas = makeQrCanvas(url);
-      const img = new Image();
-      img.alt = card.querySelector("strong").textContent;
-      img.src = canvas.toDataURL("image/png");
-      box.appendChild(img);
-    } catch (err) {
-      box.textContent = "生成失败，请换一个 http 开头的地址。";
-    }
-  });
-}
-
-function readSecretForm(form, previous) {
-  return {
-    taskId: previous.taskId,
-    name: form.name.value.trim().slice(0, 20),
-    team: form.team.value,
-    note: form.note.value.trim().slice(0, 200),
-    done: true,
-    claimedAt: previous.claimedAt
-  };
-}
-
-function normalizePassword(value) {
-  return value.replace(/\s+/g, "").replace(/遠/g, "远");
-}
-
-function samePositionCount(value) {
-  const input = Array.from(normalizePassword(value));
-  const answer = Array.from(PASSWORD);
-  let count = 0;
-  for (let i = 0; i < answer.length; i += 1) {
-    if (input[i] === answer[i]) count += 1;
-  }
-  return count;
-}
-
-function showFinalMessage(text) {
-  const node = document.getElementById("final-msg");
-  if (!node) return;
-  node.hidden = false;
-  node.textContent = text;
-}
-
-async function copyText(text, button) {
-  try {
-    await navigator.clipboard.writeText(text);
-  } catch (err) {
-    const area = document.createElement("textarea");
-    area.value = text;
-    document.body.appendChild(area);
-    area.select();
-    document.execCommand("copy");
-    area.remove();
-  }
-  const old = button.textContent;
-  button.textContent = "已复制";
-  window.setTimeout(() => { button.textContent = old; }, 1200);
-}
-
-function downloadQr(url, filename) {
-  const canvas = makeQrCanvas(url);
-  const link = document.createElement("a");
-  link.href = canvas.toDataURL("image/png");
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-}
-
-function printMode(className) {
-  document.body.classList.remove("print-qr", "print-key");
-  document.body.classList.add(className);
-  const done = () => {
-    document.body.classList.remove(className);
-    window.removeEventListener("afterprint", done);
-  };
-  window.addEventListener("afterprint", done);
-  window.print();
-}
-
-app.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-action]");
-  if (!button || button.disabled) return;
-  const action = button.getAttribute("data-action");
-  if (action === "claim") {
-    const data = {
-      taskId: Math.floor(Math.random() * TASKS.length),
-      name: "",
-      team: "",
-      note: "",
-      done: false,
-      claimedAt: Date.now()
-    };
-    saveSecret(data);
-    render();
-  } else if (action === "jump") {
-    const target = document.getElementById(button.getAttribute("data-target"));
-    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-  } else if (action === "copy-link") {
-    copyText(button.getAttribute("data-url"), button);
-  } else if (action === "download-qr") {
-    downloadQr(button.getAttribute("data-url"), button.getAttribute("data-filename"));
-  } else if (action === "print-qr") {
-    printMode("print-qr");
-  } else if (action === "print-key") {
-    printMode("print-key");
-  } else if (action === "use-here") {
-    const input = document.getElementById("base-url");
-    if (!input) return;
-    input.value = defaultBase();
-    try { sessionStorage.setItem(BASE_KEY, input.value); } catch (err) { /* 忽略 */ }
-    mountQr(input.value);
-    syncBaseWarning(input.value);
-  } else if (action === "clear-secret") {
-    memorySecret = null;
-    sessionPhotoUrl = "";
-    try { localStorage.removeItem(SECRET_KEY); } catch (err) { /* 忽略 */ }
-    button.textContent = "已清空";
-  } else if (action === "clear-final") {
-    try { sessionStorage.removeItem(FINAL_KEY); } catch (err) { /* 忽略 */ }
-    button.textContent = "已清空";
-  }
-});
-
-function rememberSecretForm(form, previous) {
-  saveSecret({
-    taskId: previous.taskId,
-    name: form.name.value.trim().slice(0, 20),
-    team: form.team.value,
-    note: form.note.value.trim().slice(0, 200),
-    done: previous.done,
-    claimedAt: previous.claimedAt
-  });
-}
-
-app.addEventListener("input", (event) => {
-  if (event.target.id === "base-url") {
-    try { sessionStorage.setItem(BASE_KEY, event.target.value); } catch (err) { /* 忽略 */ }
-    mountQr(event.target.value);
-    syncBaseWarning(event.target.value);
+  const input = document.getElementById("base-url");
+  if (!grid || !input) return;
+  const url = normalizeBase(input.value);
+  grid.innerHTML = `
+    <article class="qr-card">
+      <strong>徒步游戏首页</strong>
+      <div class="qr-box"></div>
+      <span class="url">${url ? esc(url) : "地址还不能用"}</span>
+      <div class="actions">
+        <button class="btn-small" type="button" data-action="download-qr" ${url ? "" : "disabled"}>下载二维码</button>
+      </div>
+    </article>`;
+  const box = grid.querySelector(".qr-box");
+  if (!url || typeof qrcode !== "function") {
+    box.textContent = "二维码还没生成";
     return;
   }
-  const form = event.target.form;
-  if (form && form.dataset.form === "secret" && event.target.name !== "photo") {
-    const previous = loadSecret();
-    if (previous) rememberSecretForm(form, previous);
+  try {
+    const canvas = makeQrCanvas(url);
+    const img = new Image();
+    img.alt = "徒步游戏首页二维码";
+    img.src = canvas.toDataURL("image/png");
+    box.appendChild(img);
+  } catch (err) {
+    box.textContent = "生成失败";
   }
-});
+}
 
-app.addEventListener("change", (event) => {
-  if (event.target.name !== "photo" || !event.target.files || !event.target.files[0]) return;
-  if (sessionPhotoUrl) URL.revokeObjectURL(sessionPhotoUrl);
-  sessionPhotoUrl = URL.createObjectURL(event.target.files[0]);
-  const form = event.target.form;
-  const previous = loadSecret();
-  if (form && previous) rememberSecretForm(form, previous);
-  render();
-});
+function gatePayload(form, content) {
+  if (content.type === "quiz") {
+    const answers = {};
+    content.questions.forEach((question) => { answers[question.name] = form[question.name].value; });
+    return { answers };
+  }
+  if (content.type === "theme") {
+    const payload = { theme: form.theme.value };
+    content.checks.forEach((item) => { payload[item.name] = !!(form[item.name] && form[item.name].checked); });
+    return payload;
+  }
+  if (content.type === "spots") {
+    const payload = {};
+    content.spots.forEach((item) => { payload[item.name] = !!(form[item.name] && form[item.name].checked); });
+    return payload;
+  }
+  return {
+    order: [0, 1, 2, 3].map((index) => form["step" + index].value),
+    slogan: form.slogan ? form.slogan.value.trim() : ""
+  };
+}
+
+function Cancelled() {}
+
+async function run(work, form) {
+  if (pending) return;
+  pending = true;
+  try {
+    await work();
+    serverError = "";
+    render();
+  } catch (err) {
+    if (err instanceof Cancelled) return;
+    serverError = err.message || "提交失败";
+    const node = form && form.querySelector("[data-error]");
+    if (node) {
+      node.hidden = false;
+      node.textContent = serverError;
+    } else render();
+  } finally {
+    pending = false;
+  }
+}
 
 app.addEventListener("submit", (event) => {
   const form = event.target;
   if (!(form instanceof HTMLFormElement)) return;
   event.preventDefault();
-  if (form.dataset.form === "secret") {
-    const previous = loadSecret();
-    if (!previous) return;
-    saveSecret(readSecretForm(form, previous));
+  const kind = form.dataset.form;
+  run(async () => {
+    if (kind === "team") {
+      const next = form.team.value;
+      const state = loadState();
+      const previous = state.team;
+      if (previous && previous !== next && localProgress(state)) {
+        throw new Error("本组已经有进度。要换组，请让裁判在后台清空。");
+      }
+      state.team = next;
+      saveState(state);
+      pickingTeam = false;
+      try {
+        await sync(previous && previous !== next ? "改选" : "加入");
+      } catch (err) {
+        state.team = previous;
+        saveState(state);
+        throw err;
+      }
+      return;
+    }
+    if (kind === "secret") {
+      await sync("保存秘密任务", {
+        secretDone: !!(form.done && form.done.checked),
+        secretNote: form.note.value.trim()
+      });
+      return;
+    }
+    if (kind === "report") {
+      await sync("提交举报", {
+        reportTeam: form.reportTeam.value,
+        reportNote: form.reportNote.value.trim()
+      });
+      return;
+    }
+    if (kind === "gate") {
+      if (!gateContent || Number(gateContent.id) !== Number(form.dataset.gate)) {
+        throw new Error("这一关还没载入完，请再点一次");
+      }
+      const boxes = Array.from(form.querySelectorAll('input[type="checkbox"]'));
+      if (boxes.length && boxes.every((box) => !box.checked)) {
+        if (!window.confirm("一项都没勾选。提交后这一关先记 0 分，并打开下一关。")) {
+          throw new Cancelled();
+        }
+      }
+      await sync("提交第" + form.dataset.gate + "关", { gate: gatePayload(form, gateContent) });
+      return;
+    }
+    if (kind === "login") {
+      const password = form.password.value;
+      const board = await postJson("/api/admin/board", { password });
+      adminPassword = password;
+      adminBoard = board;
+      try { sessionStorage.setItem(ADMIN_KEY, password); } catch (err) { /* 忽略 */ }
+      return;
+    }
+    if (kind === "adjust") {
+      const adjust = {};
+      [1, 2, 3, 4, 5].forEach((id) => { adjust[String(id)] = form["adjust" + id].value.trim(); });
+      adminBoard = await postJson("/api/admin/adjust", {
+        password: adminPassword,
+        team: form.dataset.team,
+        adjust,
+        reportOk: !!(form.reportOk && form.reportOk.checked)
+      });
+      flashMessage = "已保存第 " + form.dataset.team + " 组";
+    }
+  }, form);
+});
+
+app.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-action]");
+  if (!button || button.disabled) return;
+  const action = button.getAttribute("data-action");
+  if (action === "claim-secret") {
+    run(() => sync("领取秘密任务"));
+  } else if (action === "repick") {
+    pickingTeam = true;
     render();
-  } else if (form.dataset.form === "final") {
-    const value = normalizePassword(form.password.value);
-    if (value.length !== PASSWORD.length) {
-      showFinalMessage("密码是四个汉字。");
-      return;
-    }
-    if (value === PASSWORD) {
-      const data = { ok: true, team: form.team.value, at: Date.now() };
-      try { sessionStorage.setItem(FINAL_KEY, JSON.stringify(data)); } catch (err) { /* 忽略 */ }
-      render();
-      return;
-    }
-    const hit = samePositionCount(value);
-    showFinalMessage(hit > 0
-      ? "还没对上。四个字里有 " + hit + " 个字连位置都正确，其余再去跟别的队换。"
-      : "一个位置都没对上。留意每队都有一条假情报。");
+  } else if (action === "reload") {
+    run(async () => {
+      await pull();
+      pullKey = currentKey();
+    });
+  } else if (action === "download-qr") {
+    const input = document.getElementById("base-url");
+    const url = normalizeBase(input ? input.value : "");
+    if (!url) return;
+    const link = document.createElement("a");
+    link.href = makeQrCanvas(url).toDataURL("image/png");
+    link.download = "徒步游戏首页.png";
+    link.click();
+  } else if (action === "refresh-admin") {
+    run(async () => {
+      adminBoard = await postJson("/api/admin/board", { password: adminPassword });
+    });
+  } else if (action === "logout") {
+    adminPassword = "";
+    adminBoard = null;
+    try { sessionStorage.removeItem(ADMIN_KEY); } catch (err) { /* 忽略 */ }
+    render();
+  } else if (action === "reset-team") {
+    const team = button.getAttribute("data-team");
+    if (!window.confirm("清空第 " + team + " 组在服务器上的成绩？这部手机可以重新选组。")) return;
+    run(async () => {
+      adminBoard = await postJson("/api/admin/reset", { password: adminPassword, team });
+      flashMessage = "已清空第 " + team + " 组";
+    });
   }
 });
 
-window.addEventListener("hashchange", render);
-render();
+app.addEventListener("input", (event) => {
+  if (event.target.id !== "base-url") return;
+  qrBase = event.target.value;
+  mountQr();
+});
+
+window.addEventListener("hashchange", () => {
+  pullKey = "";
+  render();
+});
+
+fetch("/api/meta").then(async (response) => {
+  if (!response.ok) throw new Error("计分服务没有准备好");
+  meta = await response.json();
+  suggestedBase = meta.base || "";
+}).catch(() => {
+  serverError = "没连上计分服务。请让工作人员运行 python server.py，再用终端里打印的网址打开。";
+}).finally(() => {
+  try { adminPassword = sessionStorage.getItem(ADMIN_KEY) || ""; } catch (err) { adminPassword = ""; }
+  render();
+});
